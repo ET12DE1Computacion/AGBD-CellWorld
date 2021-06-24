@@ -1,49 +1,45 @@
 DROP DATABASE IF EXISTS Cellworld;
 CREATE DATABASE Cellworld;
 USE Cellworld;
- 
-SET FOREIGN_KEY_CHECKS=0;
- 
-CREATE TABLE Camara
-(
+
+CREATE TABLE Fabricante(
+    idFabricante TINYINT NOT NULL,
+    fabricante VARCHAR(45) NOT NULL,
+    PRIMARY KEY (idFabricante),
+    CONSTRAINT UQ_Fabricante_fabricante UNIQUE (fabricante)
+);
+
+CREATE TABLE Camara(
     idCamara SMALLINT NOT NULL,
     idFabricante TINYINT NOT NULL,
     megapixeles TINYINT NOT NULL,
-    apertura FLOAT(0) NOT NULL,
+    apertura FLOAT NOT NULL,
     PRIMARY KEY (idCamara),
-    KEY (idFabricante)
-) ;
+    CONSTRAINT FK_Camara_idFabricante FOREIGN KEY (idFabricante)
+		REFERENCES Fabricante(idFabricante)
+);
  
-CREATE TABLE Celular
-(
-    IMEI INTEGER NOT NULL,
-    idModelo SMALLINT NOT NULL,
-    PRIMARY KEY (IMEI),
-    KEY (idModelo)
-) ;
- 
-CREATE TABLE Fabricante
-(
-    idFabricante TINYINT NOT NULL,
-    fabricante VARCHAR(45) NOT NULL,
-    PRIMARY KEY (idFabricante)
-) ;
- 
-CREATE TABLE Microprocesador
-(
+CREATE TABLE Microprocesador(
     idMicroprocesador TINYINT NOT NULL,
     idFabricante TINYINT NOT NULL,
     lanzamiento DATE NOT NULL,
-    nucleos TINYINT NOT NULL,
-    velocidad FLOAT(0) NOT NULL,
+    nucleos TINYINT UNSIGNED NOT NULL,
+    velocidad FLOAT NOT NULL,
     PRIMARY KEY (idMicroprocesador),
-    KEY (idFabricante)
-) ;
+    CONSTRAINT FK_Microprocesador_idFabricante FOREIGN KEY (idFabricante)
+		REFERENCES Fabricante(idFabricante)
+);
+
+CREATE TABLE SistemaOperativo(
+    idSO TINYINT NOT NULL,
+    nombre VARCHAR(45) NOT NULL,
+    version FLOAT NOT NULL,
+    lanzamiento DATE NOT NULL,
+    PRIMARY KEY (idSO),
+    CONSTRAINT UQ_SistemaOperativo_nombre UNIQUE (nombre)
+);
  
- 
- 
-CREATE TABLE Modelo
-(
+ CREATE TABLE Modelo(
     idModelo SMALLINT NOT NULL,
     idFabricante TINYINT NOT NULL,
     idCamara SMALLINT,
@@ -58,39 +54,21 @@ CREATE TABLE Modelo
     ancho FLOAT(0) NOT NULL,
     profundidad FLOAT(0) NOT NULL,
     PRIMARY KEY (idModelo),
-    KEY (idCamara),
-    KEY (idFabricante),
-    KEY (idMicroprocesador),
-    KEY (idSO)
-) ;
- 
-CREATE TABLE SistemaOperativo
-(
-    idSO TINYINT NOT NULL,
-    nombre VARCHAR(45) NOT NULL,
-    version FLOAT(0) NOT NULL,
-    lanzamiento DATE NOT NULL,
-    PRIMARY KEY (idSO)
-) ;
- 
-SET FOREIGN_KEY_CHECKS=1;
-ALTER TABLE Camara ADD CONSTRAINT FK_SensorCamara_Fabricante 
-    FOREIGN KEY (idFabricante) REFERENCES Fabricante (idFabricante);
- 
-ALTER TABLE Celular ADD CONSTRAINT FK_Celular_Modelo 
-    FOREIGN KEY (idModelo) REFERENCES Modelo (idModelo);
- 
-ALTER TABLE Microprocesador ADD CONSTRAINT FK_Microprocesador_Fabricante 
-    FOREIGN KEY (idFabricante) REFERENCES Fabricante (idFabricante);
- 
-ALTER TABLE Modelo ADD CONSTRAINT FK_Modelo_Camara 
-    FOREIGN KEY (idCamara) REFERENCES Camara (idCamara);
- 
-ALTER TABLE Modelo ADD CONSTRAINT FK_Modelo_Fabricante 
-    FOREIGN KEY (idFabricante) REFERENCES Fabricante (idFabricante);
- 
-ALTER TABLE Modelo ADD CONSTRAINT FK_Modelo_Microprocesador 
-    FOREIGN KEY (idMicroprocesador) REFERENCES Microprocesador (idMicroprocesador);
- 
-ALTER TABLE Modelo ADD CONSTRAINT FK_Modelo_SistemaOperativo 
-    FOREIGN KEY (idSO) REFERENCES SistemaOperativo (idSO);
+    CONSTRAINT UQ_Modelo_modelo UNIQUE (modelo),
+    CONSTRAINT FK_Modelo_idFabricante FOREIGN KEY (idFabricante)
+		REFERENCES Fabricante(idFabricante),
+    CONSTRAINT FK_Modelo_idMicroprocesador FOREIGN KEY (idMicroprocesador)
+		REFERENCES Microprocesador(idMicroprocesador),
+	CONSTRAINT FK_Modelo_idCamara FOREIGN KEY (idCamara)
+		REFERENCES Camara(idCamara),
+	CONSTRAINT FK_Modelo_idSO FOREIGN KEY (idSO)
+		REFERENCES SistemaOperativo(idSO)
+);
+
+CREATE TABLE Celular(
+    IMEI INTEGER AUTO_INCREMENT,
+    idModelo SMALLINT NOT NULL,
+    PRIMARY KEY (IMEI),
+    CONSTRAINT FK_Celular_idModelo FOREIGN KEY (idModelo)
+		REFERENCES Modelo(idModelo)
+);
