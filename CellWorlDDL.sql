@@ -18,7 +18,7 @@ CREATE TABLE Camara(
     CONSTRAINT FK_Camara_idFabricante FOREIGN KEY (idFabricante)
 		REFERENCES Fabricante(idFabricante)
 );
- 
+
 CREATE TABLE Microprocesador(
     idMicroprocesador TINYINT NOT NULL,
     idFabricante TINYINT NOT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE SistemaOperativo(
     PRIMARY KEY (idSO),
     CONSTRAINT UQ_SistemaOperativo_nombre UNIQUE (nombre)
 );
- 
- CREATE TABLE Modelo(
+
+CREATE TABLE Modelo(
     idModelo SMALLINT NOT NULL,
     idFabricante TINYINT NOT NULL,
     idCamara SMALLINT,
