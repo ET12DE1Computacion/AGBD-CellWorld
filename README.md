@@ -23,7 +23,7 @@ Ya cuando lo encontremos nos va a mostrar información de nuestro teléfono.
 Queda agregar nuestro celular al DER con el modelo que acabamos de agregar (o que ya estaba). **NO** hay que preocuparse por el IMEI porque este atributo es `AUTO_INCREMENT` (ni se te ocurra poner el tuyo).
 ```sql
 insert into Celular	(idModelo)
-				values	(1),
+		values	(1),
                         (idModeloCorrespondiente);
 ```
 ### Pull Request
