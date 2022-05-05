@@ -9,9 +9,9 @@ START TRANSACTION;
 							(4,'Qualcomm');
 	-- Creación de Microprocesadores
 	insert into Microprocesador	(idMicroprocesador,idFabricante,lanzamiento,nucleos,velocidad)
-						values	(1,2,'2019/6/25',8,820),
-								(2,1,'2015/1/8',8,600),
-								(3,4,'2017/6/28',8,300);
+						values	(1,2,'2019/6/25',8, 820),
+								(2,1,'2015/1/8',8, 600),
+								(3,4,'2017/6/28',8, 1.4);
 	-- Creación de Camaras
 	insert into Camara	(idCamara,idFabricante,megapixeles,apertura)
 				values	(1,1,48,2.0),
