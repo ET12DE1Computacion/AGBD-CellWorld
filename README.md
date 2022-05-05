@@ -33,3 +33,4 @@ insert into Celular	(idModelo)
 | :---: | :---:   |       :---                                                                  | :---                                                                                                            |
 | 2021  | 5° 8°   | Ezequiel Kippes ([@Liono02](https://github.com/Liono02))                    | [218e5db](https://github.com/ET12DE1Computacion/CellWorldDB/commit/218e5db6549ab4a171a5893b74ded67a1c662973)    |
 | 2021  | 5° 7°   | Alexis Noguera ([@AlexisNogueraKurt](https://github.com/AlexisNogueraKurt)) | [f8d68c2](https://github.com/ET12DE1Computacion/AGBD-CellWorld/commit/f8d68c2ce261d9a72ec963e94e1ac5c245cbadb8) |
+| 2022  | 5° 8°   | Facundo Recalde ([@RecalDER](https://github.com/RecalDER)) | [d11a769](https://github.com/ET12DE1Computacion/AGBD-CellWorld/commit/d11a7696a62251b5861f7cb0e26836f5004f3284) |
