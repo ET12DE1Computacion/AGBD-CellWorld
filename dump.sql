@@ -1,5 +1,14 @@
 USE Cellworld;
 
+SET FOREIGN_KEY_CHECKS=0;
+	TRUNCATE TABLE Celular;
+	TRUNCATE TABLE Modelo;
+	TRUNCATE TABLE Camara;
+	TRUNCATE TABLE Microprocesador;
+	TRUNCATE TABLE SistemaOperativo;
+	TRUNCATE TABLE Fabricante;
+SET FOREIGN_KEY_CHECKS=1;
+
 START TRANSACTION;
 	-- Creacion de Fabricantes
 	insert into Fabricante	(idFabricante,fabricante)
